@@ -4,16 +4,18 @@ defmodule Waffle.Ecto.Mixfile do
   @version "0.0.11"
 
   def project do
-    [app: :waffle_ecto,
-     version: @version,
-     elixir: "~> 1.4",
-     elixirc_paths: elixirc_paths(Mix.env),
-     deps: deps(),
-     docs: docs(),
+    [
+      app: :waffle_ecto,
+      version: @version,
+      elixir: "~> 1.4",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      deps: deps(),
+      docs: docs(),
 
-     # Hex
-     description: description(),
-     package: package()]
+      # Hex
+      description: description(),
+      package: package()
+    ]
   end
 
   # Configuration for the OTP application
@@ -27,7 +29,7 @@ defmodule Waffle.Ecto.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   defp description do
     """
@@ -36,10 +38,12 @@ defmodule Waffle.Ecto.Mixfile do
   end
 
   defp package do
-    [maintainers: ["Boris Kuznetsov"],
-     licenses: ["Apache 2.0"],
-     links: %{"GitHub" => "https://github.com/elixir-waffle/waffle_ecto"},
-     files: ~w(mix.exs README.md CHANGELOG.md lib)]
+    [
+      maintainers: ["Boris Kuznetsov"],
+      licenses: ["Apache 2.0"],
+      links: %{"GitHub" => "https://github.com/elixir-waffle/waffle_ecto"},
+      files: ~w(mix.exs README.md CHANGELOG.md lib)
+    ]
   end
 
   defp docs do
@@ -51,7 +55,7 @@ defmodule Waffle.Ecto.Mixfile do
 
   defp deps do
     [
-      {:waffle, "~> 1.0"},
+      {:waffle, path: "/Users/dev/code/elixir/waffle"},
       {:ecto, "~> 3.0"},
       {:mock, "~> 0.3", only: :test},
       {:ex_doc, ">= 0.23.0", only: :dev},
