@@ -55,7 +55,7 @@ defmodule Waffle.Ecto.Mixfile do
 
   defp deps do
     [
-      {:waffle, path: "/Users/dev/code/elixir/waffle"},
+      {:waffle, git: "https://github.com/ringofhealth/waffle.git"},
       {:ecto, "~> 3.0"},
       {:mock, "~> 0.3", only: :test},
       {:ex_doc, ">= 0.23.0", only: :dev},
