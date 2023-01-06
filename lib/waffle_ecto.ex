@@ -19,5 +19,5 @@ defmodule Waffle.Ecto do
 
   """
 
-  @type t :: %{file_name: String.t, updated_at: DateTime.t}
+  @type t :: %{file_name: String.t(), updated_at: DateTime.t(), metadata: map()}
 end

@@ -8,31 +8,23 @@ defmodule Waffle.Ecto.Type do
   def type, do: :string
 
   @filename_with_timestamp ~r{^(.*)\?(\d+)$}
-  def cast(definition, args, cb \\ nil)
 
-  def cast(definition, %{file_name: file, updated_at: updated_at}, _cb) do
+  def cast(definition, %{file_name: file, updated_at: updated_at}) do
     cast(definition, %{"file_name" => file, "updated_at" => updated_at})
   end
 
-  def cast(_definition, %{"file_name" => file, "updated_at" => updated_at}, _cb) do
+  def cast(_definition, %{"file_name" => file, "updated_at" => updated_at}) do
     {:ok, %{file_name: file, updated_at: updated_at}}
   end
 
-  def cast(definition, args, cb) do
+  def cast(definition, args) do
     case definition.store(args) do
-      {:ok, %{file_name: file_name} = upload_return} ->
+      {:ok, %{file_name: file_name, metadata: metadata}} ->
         src = %{
           file_name: file_name,
+          metadata: metadata,
           updated_at: NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second)
         }
-
-        src =
-          if is_function(cb) do
-            data = cb.(upload_return)
-            Map.merge(src, data)
-          else
-            src
-          end
 
         {:ok, src}
 
